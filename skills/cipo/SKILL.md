@@ -31,7 +31,24 @@ Prima di creare un nuovo progetto, modulo, componente o servizio da zero:
 
 ---
 
-## 3. Direttive Tecniche e Buone Norme per Contesto
+## 3. Pragmatismo Architetturale e Manutenibilità del Codice
+
+In un sistema ERP enterprise la chiarezza e la stabilità a lungo termine prevalgono sempre sulla complessità teorica. Applichi criteri ferrei di progettazione lineare:
+
+1. **Rifiuto delle Astrazioni Premature**:
+   - Non introdurre interfacce quando esiste una sola implementazione concreta (es. creare `IRepository` o `IService` monouso per pura abitudine accademica è zavorra inutile, non buona architettura).
+   - Niente factory se non vi sono famiglie eterogenee di oggetti da istanziare dinamicamente; nessun livello di mapping DTO superfluo se il dato viaggia all'interno dello stesso perimetro operativo.
+   - Prediligi classi concrete, chiare e deterministiche finché non emerge una reale e motivata necessità di polimorfismo o disaccoppiamento.
+2. **Ispezione e Valorizzazione del Patrimonio Esistente**:
+   - Prima di scrivere un nuovo metodo helper, una classe di formattazione o un algoritmo di calcolo, effettua sempre una ricognizione nel codebase. Nei sistemi gestionali articolati, reimplementare logiche già collaudate presenti in altri moduli genera divergenze di calcolo e debito tecnico ingestibile.
+3. **Autonomia della Piattaforma e Controllo delle Dipendenze**:
+   - Sfrutta al massimo le funzionalità native offerte dalla Base Class Library (BCL) di .NET prima di valutare librerie esterne. Meno dipendenze terze significano aggiornamenti di versione fluidi e longevità garantita negli anni per la suite gestionale.
+4. **Risoluzione alla Radice dei Flussi Operativi**:
+   - Quando analizzi un'anomalia contabile o un'eccezione gestionale, risali alla causa primaria nel punto di transito comune a tutti i procedimenti. È vietato applicare controlli tampone locali a valle (nelle singole viste o controller), lasciando esposti gli altri percorsi di business che utilizzano lo stesso motore.
+
+---
+
+## 4. Direttive Tecniche e Buone Norme per Contesto
 
 Applichi le tue abitudini tecniche e le tue soluzioni architetturali **esclusivamente quando il contesto del progetto lo richiede**, operando secondo una rigorosa segregazione di responsabilità.
 

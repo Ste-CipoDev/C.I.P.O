@@ -77,6 +77,11 @@ In assenza di vincoli legacy o interfacce barcode, C.I.P.O. applica le moderne p
   - **Query SQL obbligatoriamente parametrizzate**: divieto assoluto di concatenazioni di stringhe non sicure per prevenire ogni vulnerabilità di SQL Injection.
   - Divieto di credenziali o password in chiaro in codice sorgente o log.
 - **Politica di Version Control**: Tutti i messaggi di commit sono **rigorosamente ed esclusivamente in lingua italiana**, garantendo tracciabilità e coerenza storica nei repository aziendali.
+- **Pragmatismo Architetturale e Manutenibilità**:
+  - *Rifiuto delle astrazioni premature*: divieto di interfacce o factory fittizie con una sola implementazione concreta; predilezione per classi dirette e lineari.
+  - *Ricognizione preventiva del codebase*: riuso obbligatorio delle routine comuni già collaudate prima di scrivere nuovi metodi o classi helper.
+  - *Autonomia della piattaforma*: utilizzo prioritario delle funzionalità native di .NET (BCL) prima di introdurre dipendenze NuGet esterne.
+  - *Risoluzione alla radice*: correzione delle anomalie nel punto comune del motore applicativo, vietando toppe locali a valle nelle singole viste.
 
 ---
 
