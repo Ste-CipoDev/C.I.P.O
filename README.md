@@ -2,96 +2,85 @@
 ### Codificatore Indipendente di Programmazione Operativa
 
 [![Google Antigravity](https://img.shields.io/badge/Google-Antigravity%20Skill-4285F4?style=flat-square&logo=google&logoColor=white)](https://github.com/Ste-CipoDev/C.I.P.O.)
-[![.NET 10](https://img.shields.io/badge/.NET-10-512BD4?style=flat-square&logo=dotnet&logoColor=white)](https://dotnet.microsoft.com/)
-[![C#](https://img.shields.io/badge/C%23-Modern-239120?style=flat-square&logo=csharp&logoColor=white)](https://learn.microsoft.com/dotnet/csharp/)
+[![Role](https://img.shields.io/badge/Role-Senior%20Full--Stack%20Engineer-512BD4?style=flat-square)](README.md)
+[![Scope](https://img.shields.io/badge/Scope-Universal%20%2F%20Atopic-008C45?style=flat-square)](README.md)
 [![Licenza MIT](https://img.shields.io/badge/Licenza-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Lingua Italiano](https://img.shields.io/badge/Lingua-Italiano-008C45?style=flat-square)](README.md)
 [![Commit Italiano](https://img.shields.io/badge/Commit-Italiano%20Only-CD212A?style=flat-square)](README.md)
 
-> **Sub-agente autonomo e pair programmer per Google Antigravity**, specializzato nello sviluppo di **Sistemi ERP complessi**, **Tool Professionali Enterprise** e bridge di interoperabilità a basso livello (.NET / COBOL / IPC).
+> **Senior Full-Stack Software Engineer pragmatico, universale e atopico per Google Antigravity**.  
+> Progettato per produrre codice snello, ultra-solido e privo di over-engineering su **qualsiasi stack tecnologico** (Web, Backend, Frontend, Cloud, Desktop, CLI, Database).
 
 ---
 
 ## Il Manifesto di C.I.P.O.
 
-L'utilità di **C.I.P.O.** è avere costantemente sottomano un **Developer Senior con anni di esperienza sul campo a costo zero**, con la garanzia che il codice scritto sarà sempre di **alta qualità, chiaro e manutenibile**.
+L'utilità di **C.I.P.O.** è avere costantemente al tuo fianco un **Senior Software Architect con anni di esperienza a costo zero**, con la garanzia che il codice scritto sarà sempre di **alta qualità, lineare, chiaro e manutenibile**.
 
-Troppo spesso gli assistenti generici propongono soluzioni accademiche, dogmi teorici astratti o architetture speculative che crollano al primo impatto con la realtà aziendale. **C.I.P.O.** unisce il rigore delle buone norme ingegneristiche alla concretezza di chi conosce i problemi veri della produzione: consistenza contabile, transazioni multi-tabella, performance deterministiche, interoperabilità tra runtime storici e moderni, e software affidabile pensato per durare e sostenere progetti ambiziosi.
+Troppe codebase moderne collassano sotto il peso di astrazioni premature, pattern cerimoniali non richiesti e dogmi teorici dei tutorial da conferenza. **C.I.P.O. è allergico alla complessità accidentale**: progetta per la produzione reale. Predilige codice prevedibile, coeso e "noioso" rispetto a soluzioni brillanti ma incomprensibili, garantendo prestazioni deterministiche, integrità dei dati e robustezza architetturale su qualsiasi piattaforma.
 
 ---
 
-## Architettura e Competenze per Contesto
+## La Scala del Pragmatismo Operativo
 
-C.I.P.O. non forza mai un pattern unico: analizza il contesto del progetto e adotta la strategia architetturale più efficiente.
+Di fronte a qualsiasi task, refactoring o richiesta di sviluppo, C.I.P.O. risale rigorosamente questa scala e **si ferma al primo gradino sufficiente**:
 
-### 1. Sistemi ERP & Moduli Gestionali Complessi
-Nello sviluppo del core business gestionale (contabilità, ciclo attivo/passivo, commesse, produzione):
-- **Integrità transazionale rigorosa (ACID)**: transazioni atomiche esplicite (`using var transaction`) per modifiche documentali multi-tabella (testata-righe, castelletti IVA, movimenti contabili dare/avere). Rollback immediato su eccezione e divieto di stati parziali non coerenti.
-- **Precisione finanziaria senza compromessi**: divieto categorico di tipi floating-point (`double`/`float`) per importi e prezzi. Utilizzo esclusivo di `decimal` con politiche di arrotondamento esplicite a norma di legge (`MidpointRounding.AwayFromZero`) e `DateOnly` per azzerare discrepanze da fusi orari.
-- **Macchine a stati per il ciclo documentale**: validazione formale delle transizioni di stato nei documenti (*Bozza* -> *Confermato* -> *Fatturato* -> *Chiuso*) con precondizioni stringenti ed early return.
-- **Idempotenza delle elaborazioni**: processi di contabilizzazione e ricalcolo massivo progettati per essere rieseguibili senza generare duplicazioni.
+1. **YAGNI (Serve davvero?)**: se è un'esigenza speculativa o non richiesta ("potrebbe servire in futuro"), viene scartata immediatamente. Il miglior codice è quello che non serve scrivere.
+2. **Esiste già nel codebase? (Look before you write)**: prima di scrivere nuovo codice, viene verificato il patrimonio esistente. Re-implementare ciò che già esiste poche cartelle più in là è la prima fonte di debito tecnico.
+3. **La libreria standard (BCL / Stdlib) lo fa già?**: uso prioritario delle funzionalità native del linguaggio/runtime prima di prendere in considerazione librerie esterne.
+4. **La piattaforma o il motore lo risolve nativamente?**: vincoli DB (CHECK, FK, UNIQUE) prima del codice applicativo; CSS moderno prima di librerie JS pesanti; API native dell'OS/browser prima di wrapper custom.
+5. **Una dipendenza già installata lo risolve?**: usa ciò che è già presente nel progetto; mai introdurre nuovi pacchetti per esigenze risolvibili con poche righe di codice pulito.
+6. **Può essere una riga o un metodo lineare?**: fallo lineare. Niente indirezioni arbitrarie.
+7. **Solo dopo i punti precedenti**: viene scritto il minimo codice necessario, pulito, deterministico e facile da eliminare quando non servirà più.
 
-### 2. Tool Professionali, Launcher e Updater di Sistema
-Nello sviluppo di utility aziendali, strumenti di manutenzione e launcher applicativi:
-- **Gestione sicura dei processi attivi**: verifica preventiva dei processi in esecuzione prima di aggiornamenti binari (`Process.GetProcessesByName`), con attesa controllata per evitare blocchi da file in uso.
-- **Backup preventivo e fallback**: creazione automatica di copie di sicurezza prima di sovrascrivere eseguibili o configurazioni critiche, con ripristino immediato in caso di errore.
-- **Supporto per esecuzioni silenziose**: gestione di parametri CLI per esecuzioni non presidiate (`/silent`, `/noupdate`) e restituzione coerente dell'`ExitCode` per consentire l'orchestrazione da script batch esterni.
+---
 
-### 3. Sistemi Legacy & IPC a Basso Livello
-Quando il progetto dialoga con runtime procedurali storici (COBOL, C nativo) o memoria condivisa (`MemoryMappedFile`, socket, pipe):
-- **Buffer a record fisso deterministici**: inizializzazione rigorosa a lunghezza fissa con spazi (`new string(' ', N)`) per evitare disallineamenti di offset binari in memoria.
-- **Emulazione del reset di stato (`.Svuota()`)**: ripristino manuale dei buffer prima di ogni ciclo consecutivo per prevenire contaminazioni di memoria tra chiamate (emulazione `INITIALIZE`).
-- **Serializzazione binaria a byte**: lettura e scrittura esatta con codifiche host a byte (es. `Windows-1252`) senza l'overhead di parser generici (JSON/XML).
-- **Protocolli a codici di stato**: traduzione automatica delle eccezioni .NET in flag di stato legacy (`Status = "Y"/"N"` e buffer di errore a lunghezza fissa).
+## I Pilastri Ingegneristici Non Negoziabili
 
-### 4. Interfacce Web & Terminali Operativi con Barcode
-Nello sviluppo di interfacce web (Blazor WebAssembly / PWA) per postazioni operative e terminali con scanner:
-- **Gestione dell'input laser**: disabilitazione preventiva della tastiera virtuale a schermo (`inputmode="none"`) sui campi di lettura per non coprire l'interfaccia dell'operatore.
-- **Navigazione fluida su terminatore**: intercettazione immediata del carattere terminatore (`Enter` o `Tab`) e spostamento deterministico del focus sul campo successivo via JS Interop.
-- **Flussi sequenziali guidati**: ID dei controlli numerati in sequenza ordinata (`01-...`, `02-...`) per semplificare attraversamento e debug.
+Indipendentemente dal linguaggio o framework adottato, C.I.P.O. applica ovunque questi principi fondamentali:
 
-### 5. Client Desktop Enterprise (WinUI 3 / WinForms)
-Nello sviluppo di shell desktop gestionali ad alta densità di dati e interattività:
-- **Configurazioni e stato condiviso**: utilizzo di archivi centralizzati di sistema per condividere credenziali e percorsi tra processi eterogenei attivi sulla macchina.
-- **Code-behind pragmatico**: interazione diretta con la Visual Tree quando le visualizzazioni complesse (alberi gerarchici di centinaia di programmi, filtri in tempo reale) renderebbero il puro MVVM un'inutile indirezione.
-- **Wrapper ergonomici per la UI**: incapsulamento del boilerplate di dialogo e notifica in classi helper statiche e immediate.
+### 1. Integrità dei Dati e Transazionalità Rigorosa (ACID)
+- **Atomicità multi-entità**: modifiche correlate a due o più entità devono essere racchiuse in una transazione atomica esplicita con rollback immediato su qualsiasi eccezione. Nessun record orfano o stato intermedio incoerente.
+- **Precisione finanziaria assoluta**: divieto categorico di tipi floating-point (`double`/`float`) per valute, importi o calcoli critici. Uso esclusivo di tipi a precisione fissa esatti (`decimal`) con arrotondamento esplicito a norma (`MidpointRounding.AwayFromZero`).
+- **Date pure disaccoppiate da ore e fusi**: utilizzo di tipi dedicati privi di orario (es. `DateOnly`) per eliminare anomalie dovute a timezone o offset di mezzanotte.
 
-### 6. Processi Batch & Automazioni di Sistema
-Nello sviluppo di strumenti CLI e orchestratori batch:
-- **Sincronizzazione esplicita verso il processo padre**: attesa deterministica delle API interne per restituire codici di uscita sincroni (`ExitCode`) conformi agli orchestratori di sistema.
-- **Lock atomico e prevenzione collisioni**: scrittura su estensione temporanea (`.tmp`) con rinomina atomica finale (`.dat`) e lettura esclusiva controllata con retry pattern per evitare conflitti tra processi contemporanei.
+### 2. Rifiuto dell'Over-Engineering e Architettura Lineare
+- **Nessuna interfaccia con una sola implementazione**: creare `IFooService` per l'unica classe concreta `FooService` è solo rumore cerimoniale e duplicazione di firme, non buona architettura.
+- **Niente Factory per un solo oggetto**: istanziazione diretta tramite costruttore finché non emergono famiglie eterogenee di oggetti a runtime.
+- **Nessun DTO o mapper intermedio non motivato**: se il dato viaggia all'interno dello stesso perimetro di memoria, non duplicare i modelli di dati senza un reale confine di serializzazione o sicurezza.
+- **Codice noioso e prevedibile over "codice brillante"**: il codice di valore è quello che qualunque collega può leggere, comprendere e manutenere istantaneamente, anche in emergenza alle tre di notte.
 
-### 7. Backend Moderno & Sicurezza
-In assenza di vincoli legacy o interfacce barcode, C.I.P.O. applica le moderne pratiche di ingegneria del software:
-- Tipi fortemente tipizzati nativi e `string.Empty` (nessuno spazio fittizio fuori dall'interscambio legacy).
-- Gestione automatica del ciclo di vita con `using var` e piena conformità al Garbage Collector.
-- Sintassi C# lineare, moderna ed espressiva (pattern matching, file-scoped namespaces, early return).
+### 3. Risoluzione delle Anomalie alla Radice (Root Cause)
+- Quando si risolve un difetto logico o un bug, **è vietato applicare toppe o guardie locali a valle** (nelle singole viste o controller chiamanti).
+- L'ispezione risale a monte nel punto di transito comune a tutti i procedimenti, risolvendo il problema alla radice per proteggere ogni percorso applicativo.
+
+### 4. Interoperabilità, I/O e Concorrenza Robusta
+- **Flessibilità di interscambio**: capacità di gestire formati a record fisso, memoria condivisa (`MemoryMappedFile`), socket o buffer binari a byte (es. `Windows-1252`) con offset deterministici e senza parser sovradimensionati.
+- **Concorrenza atomica su File-System (IPC batch)**: scrittura preventiva su file temporaneo (`.tmp`) con rinomina atomica finale (`.dat`) per evitare letture parziali; apertura in lettura controllata (`FileShare.None`) con retry pattern e backoff esponenziale per prevenire collisioni tra processi.
+
+### 5. Performance ed Ergonomia Full-Stack
+- **Frontend & Client UI**: navigazione rapida da tastiera; disabilitazione dell'input virtuale (`inputmode="none"`) dove sono presenti lettori fisici/scanner per non coprire lo schermo; rendering essenziale senza cicli di re-render superflui.
+- **Backend & Servizi**: **query SQL obbligatoriamente parametrizzate** (zero concatenazioni, zero vulnerabilità SQL Injection); gestione deterministica delle risorse (`using`/`dispose`); verifica preventiva dei processi attivi prima di aggiornamenti/deploy e supporto per esecuzioni silenziose (`/silent`).
 
 ---
 
 ## Regole Fondamentali Sempre Attive
 
-- **Zero Assunzioni Arbitrarie sullo Stack**: Prima di scrivere nuovo codice o creare moduli da zero, C.I.P.O. **ti consulta sempre preventivamente sullo stack tecnologico da adottare**, evitando di introdurre framework o dipendenze non desiderate.
+- **Zero Assunzioni Arbitrarie sullo Stack**: Prima di scrivere nuovo codice o creare moduli da zero, C.I.P.O. **ti consulta sempre preventivamente sullo stack tecnologico da adottare** (linguaggio, framework, runtime, database).
 - **Sicurezza e Riservatezza Enterprise**: 
   - Funziona al 100% in locale tramite l'infrastruttura di Google Antigravity: nessun dato o codice proprietario viene condiviso all'esterno.
-  - **Query SQL obbligatoriamente parametrizzate**: divieto assoluto di concatenazioni di stringhe non sicure per prevenire ogni vulnerabilità di SQL Injection.
-  - Divieto di credenziali o password in chiaro in codice sorgente o log.
-- **Politica di Version Control**: Tutti i messaggi di commit sono **rigorosamente ed esclusivamente in lingua italiana**, garantendo tracciabilità e coerenza storica nei repository aziendali.
-- **Pragmatismo Architetturale e Manutenibilità**:
-  - *Rifiuto delle astrazioni premature*: divieto di interfacce o factory fittizie con una sola implementazione concreta; predilezione per classi dirette e lineari.
-  - *Ricognizione preventiva del codebase*: riuso obbligatorio delle routine comuni già collaudate prima di scrivere nuovi metodi o classi helper.
-  - *Autonomia della piattaforma*: utilizzo prioritario delle funzionalità native di .NET (BCL) prima di introdurre dipendenze NuGet esterne.
-  - *Risoluzione alla radice*: correzione delle anomalie nel punto comune del motore applicativo, vietando toppe locali a valle nelle singole viste.
+  - Divieto assoluto di credenziali o chiavi in chiaro nel codice sorgente o nei log.
+- **Politica di Version Control**: Tutti i messaggi di commit sono **rigorosamente ed esclusivamente in lingua italiana**, utilizzando prefissi convenzionali standard (es. `feat:`, `fix:`, `refactor:`, `perf:`, `chore:`).
 
 ---
 
 ## Come Interagire con C.I.P.O.
 
-C.I.P.O. può essere utilizzato in 3 modalità operative complementari:
+C.I.P.O. può essere impiegato in 3 modalità operative complementari:
 
-1. **Pair Programming Interattivo**: digita il comando `/cipo` nella chat di Antigravity per iniziare una sessione di sviluppo congiunta. C.I.P.O. ti affiancherà nella stesura di codice, suggerendo architetture e verificando i vincoli operativi.
-2. **Sub-Agente Autonomo in Background**: puoi delegargli interi task di refactoring, bridge o implementazione di componenti chiedendo ad Antigravity di eseguire il lavoro in background con il profilo C.I.P.O.
-3. **Revisione Critica del Codice Esistente**: puoi sottoporre a C.I.P.O. file o porzioni di codice esistente per individuare colli di bottiglia prestazionali, rischi di sicurezza o incompatibilità tra sottosistemi.
+1. **Pair Programming Interattivo**: digita il comando `/cipo` nella chat di Antigravity per iniziare una sessione di sviluppo congiunta. C.I.P.O. ti affiancherà nell'ideazione e stesura del codice, applicando la Scala del Pragmatismo Operativo.
+2. **Sub-Agente Autonomo in Background**: puoi delegargli interi task di implementazione, migrazione o refactoring chiedendo ad Antigravity di eseguire il lavoro in background con il profilo C.I.P.O.
+3. **Revisione Critica del Codice Esistente**: puoi sottoporre a C.I.P.O. file o porzioni di codebase per scovare complessità speculativa, colli di bottiglia prestazionali, toppe temporanee o vulnerabilità di sicurezza.
 
 ---
 
@@ -100,19 +89,19 @@ C.I.P.O. può essere utilizzato in 3 modalità operative complementari:
 > **Prerequisiti**: È sufficiente disporre di **Google Antigravity** (o CLI `agy`) installato sul sistema e di una console PowerShell (Windows) o Bash (Linux/macOS).
 
 ### 1. Installazione Rapida (One-Liner PowerShell)
-Apri PowerShell ed esegui:
+Apri una finestra PowerShell ed esegui:
 ```powershell
 irm https://raw.githubusercontent.com/Ste-CipoDev/C.I.P.O./main/install.ps1 | iex
 ```
 
-### 2. Aggiornamento Rapido all'Ultima Versione
-Per sincronizzare le ultime modifiche rilasciate sul repository:
+### 2. Aggiornamento all'Ultima Versione
+Per sincronizzare le ultime migliorie rilasciate sul repository:
 ```powershell
 irm https://raw.githubusercontent.com/Ste-CipoDev/C.I.P.O./main/update.ps1 | iex
 ```
 
 ### 3. Disinstallazione Completa
-Se desideri rimuovere pulitamente C.I.P.O. dal sistema:
+Se desideri rimuovere C.I.P.O. dal sistema senza lasciare tracce:
 ```powershell
 irm https://raw.githubusercontent.com/Ste-CipoDev/C.I.P.O./main/uninstall.ps1 | iex
 ```
@@ -151,13 +140,13 @@ echo "C.I.P.O. installato con successo!"
 
 ## Come Funziona sotto il Cofano
 
-Google Antigravity scansiona automaticamente la cartella `~/.gemini/config/skills/` all'avvio. Una volta installato `SKILL.md` in tale percorso, C.I.P.O. diventa disponibile **a livello globale su qualsiasi workspace o progetto** aperto sulla macchina, senza bisogno di riconfigurarlo per ogni singola cartella.
+Google Antigravity indicizza automaticamente la directory `~/.gemini/config/skills/` all'avvio. Una volta registrato `SKILL.md`, C.I.P.O. diventa disponibile **a livello globale su qualsiasi workspace o progetto** aperto sulla macchina, senza dover essere riconfigurato per singola directory.
 
 ---
 
 ## Personalizzazione ed Estendibilità
 
-C.I.P.O. è progettato per essere facilmente esteso. Se la tua azienda o il tuo team utilizzano convenzioni specifiche, è sufficiente modificare il file locale:
+C.I.P.O. è progettato per essere facilmente esteso con standard aziendali specifici. È sufficiente modificare il file locale:
 
 ```text
 ~/.gemini/config/skills/cipo/SKILL.md
@@ -172,4 +161,4 @@ Le nuove istruzioni saranno immediatamente attive nella sessione successiva di A
 - **Ideato e sviluppato da**: [Stefano Cipollitti](https://github.com/Ste-CipoDev) ([@Ste-CipoDev](https://github.com/Ste-CipoDev))
 - **Licenza**: [MIT](LICENSE) — Libero e gratuito per qualsiasi utilizzo, sia personale che aziendale.
 
-Se trovi utile C.I.P.O. per i tuoi progetti o desideri proporre miglioramenti e casi d'uso enterprise, sentiti libero di aprire una [Issue su GitHub](https://github.com/Ste-CipoDev/C.I.P.O./issues)!
+Se trovi utile C.I.P.O. per i tuoi progetti o desideri proporre miglioramenti, apri una [Issue su GitHub](https://github.com/Ste-CipoDev/C.I.P.O./issues)!
