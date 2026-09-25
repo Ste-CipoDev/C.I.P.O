@@ -1,0 +1,9 @@
+{
+  "name": "cipo",
+  "version": "1.0.0",
+  "description": "C.I.P.O. (Codificatore Indipendente di Programmazione Operativa): sub-agente autonomo e pair programmer pragmatico per sistemi gestionali enterprise, bridge COBOL (.NET / MemoryMappedFile), Blazor PWA per terminali barcode e desktop WinUI 3.",
+  "author": {
+    "name": "Stefano Cipollitti"
+  },
+  "license": "MIT"
+}
