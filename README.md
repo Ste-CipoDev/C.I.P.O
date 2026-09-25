@@ -113,25 +113,16 @@ irm https://raw.githubusercontent.com/Ste-CipoDev/C.I.P.O./main/uninstall.ps1 | 
 #### Su Windows (PowerShell):
 ```powershell
 $destSkills = "$env:USERPROFILE\.gemini\config\skills\cipo"
-$destPlugin = "$env:USERPROFILE\.gemini\config\plugins\cipo"
-
 New-Item -ItemType Directory -Force -Path $destSkills | Out-Null
-New-Item -ItemType Directory -Force -Path "$destPlugin\skills\cipo" | Out-Null
-
 Copy-Item -Force ".\skills\cipo\SKILL.md" -Destination "$destSkills\SKILL.md"
-Copy-Item -Force ".\plugins\cipo\plugin.json" -Destination "$destPlugin\plugin.json"
-Copy-Item -Force ".\skills\cipo\SKILL.md" -Destination "$destPlugin\skills\cipo\SKILL.md"
 
 Write-Host "C.I.P.O. installato con successo!" -ForegroundColor Green
 ```
 
 #### Su Linux / macOS (Bash):
 ```bash
-mkdir -p ~/.gemini/config/skills/cipo ~/.gemini/config/plugins/cipo/skills/cipo
-
+mkdir -p ~/.gemini/config/skills/cipo
 cp ./skills/cipo/SKILL.md ~/.gemini/config/skills/cipo/SKILL.md
-cp ./plugins/cipo/plugin.json ~/.gemini/config/plugins/cipo/plugin.json
-cp ./skills/cipo/SKILL.md ~/.gemini/config/plugins/cipo/skills/cipo/SKILL.md
 
 echo "C.I.P.O. installato con successo!"
 ```

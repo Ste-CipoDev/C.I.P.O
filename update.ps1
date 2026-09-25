@@ -4,11 +4,15 @@ $ErrorActionPreference = "Stop"
 Write-Host "Verifica e aggiornamento di C.I.P.O. in corso..." -ForegroundColor Cyan
 
 $destSkills = "$env:USERPROFILE\.gemini\config\skills\cipo"
-$destPlugin = "$env:USERPROFILE\.gemini\config\plugins\cipo"
+$legacyPlugin = "$env:USERPROFILE\.gemini\config\plugins\cipo"
 
-# Assicurati che le cartelle esistano
+# Assicurati che la cartella della skill esista
 New-Item -ItemType Directory -Force -Path $destSkills | Out-Null
-New-Item -ItemType Directory -Force -Path "$destPlugin\skills\cipo" | Out-Null
+
+# Pulizia di sicurezza di eventuali versioni duplicate nei plugin
+if (Test-Path $legacyPlugin) {
+    Remove-Item -Recurse -Force $legacyPlugin -ErrorAction SilentlyContinue
+}
 
 $baseUrl = "https://raw.githubusercontent.com/Ste-CipoDev/C.I.P.O./main"
 
@@ -17,14 +21,10 @@ try {
     if (Test-Path ".\skills\cipo\SKILL.md") {
         Write-Host "Aggiornamento dai file locali del repository..." -ForegroundColor Yellow
         Copy-Item -Force ".\skills\cipo\SKILL.md" -Destination "$destSkills\SKILL.md"
-        Copy-Item -Force ".\plugins\cipo\plugin.json" -Destination "$destPlugin\plugin.json"
-        Copy-Item -Force ".\skills\cipo\SKILL.md" -Destination "$destPlugin\skills\cipo\SKILL.md"
     } else {
         # Altrimenti scarica l'ultima versione direttamente da GitHub
         Write-Host "Download dell'ultima versione da GitHub (Ste-CipoDev/C.I.P.O.)..." -ForegroundColor Yellow
         Invoke-RestMethod -Uri "$baseUrl/skills/cipo/SKILL.md" -OutFile "$destSkills\SKILL.md"
-        Invoke-RestMethod -Uri "$baseUrl/plugins/cipo/plugin.json" -OutFile "$destPlugin\plugin.json"
-        Copy-Item -Force "$destSkills\SKILL.md" -Destination "$destPlugin\skills\cipo\SKILL.md"
     }
 
     Write-Host "C.I.P.O. aggiornato con successo all'ultima versione!" -ForegroundColor Green

@@ -4,17 +4,19 @@ $ErrorActionPreference = "Stop"
 Write-Host "Installazione di C.I.P.O. in corso..." -ForegroundColor Cyan
 
 $destSkills = "$env:USERPROFILE\.gemini\config\skills\cipo"
-$destPlugin = "$env:USERPROFILE\.gemini\config\plugins\cipo"
 
-# Creazione cartelle di destinazione
+# Creazione cartella di destinazione per la skill globale
 New-Item -ItemType Directory -Force -Path $destSkills | Out-Null
-New-Item -ItemType Directory -Force -Path "$destPlugin\skills\cipo" | Out-Null
 
 $baseUrl = "https://raw.githubusercontent.com/Ste-CipoDev/C.I.P.O./main"
 
-# Download definizioni skill e plugin
+# Download definizione skill globale
 Invoke-RestMethod -Uri "$baseUrl/skills/cipo/SKILL.md" -OutFile "$destSkills\SKILL.md"
-Invoke-RestMethod -Uri "$baseUrl/plugins/cipo/plugin.json" -OutFile "$destPlugin\plugin.json"
-Copy-Item -Force "$destSkills\SKILL.md" -Destination "$destPlugin\skills\cipo\SKILL.md"
+
+# Rimozione di eventuali versioni legacy duplicate registrate come plugin
+$legacyPlugin = "$env:USERPROFILE\.gemini\config\plugins\cipo"
+if (Test-Path $legacyPlugin) {
+    Remove-Item -Recurse -Force $legacyPlugin -ErrorAction SilentlyContinue
+}
 
 Write-Host "C.I.P.O. installato con successo! È pronto e richiamabile con /cipo in qualsiasi progetto Antigravity." -ForegroundColor Green
