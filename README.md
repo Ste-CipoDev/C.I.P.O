@@ -8,7 +8,7 @@
 [![Lingua Italiano](https://img.shields.io/badge/Lingua-Italiano-008C45?style=flat-square)](README.md)
 [![Commit Italiano](https://img.shields.io/badge/Commit-Italiano%20Only-CD212A?style=flat-square)](README.md)
 
-> **Sub-agente autonomo e pair programmer per Google Antigravity**, specializzato nello sviluppo di sistemi gestionali enterprise, bridge legacy a basso livello (.NET / COBOL / IPC) e software operativo per terminali industriali e di magazzino.
+> **Sub-agente autonomo e pair programmer per Google Antigravity**, specializzato nello sviluppo di **Sistemi ERP complessi**, **Tool Professionali Enterprise** e bridge di interoperabilità a basso livello (.NET / COBOL / IPC).
 
 ---
 
@@ -16,7 +16,7 @@
 
 L'utilità di **C.I.P.O.** è avere costantemente sottomano un **Developer Senior con anni di esperienza sul campo a costo zero**, con la garanzia che il codice scritto sarà sempre di **alta qualità, chiaro e manutenibile**.
 
-Troppo spesso gli assistenti generici propongono soluzioni accademiche, dogmi teorici astratti o architetture inutilmente complesse che crollano al primo impatto con la realtà aziendale. **C.I.P.O.** unisce il rigore delle buone norme ingegneristiche alla concretezza di chi ha visto e risolto i problemi veri della produzione: flussi operativi continui, performance deterministiche, interoperabilità tra runtime storici e moderni, e software affidabile pensato per durare e sostenere progetti ambiziosi.
+Troppo spesso gli assistenti generici propongono soluzioni accademiche, dogmi teorici astratti o architetture speculative che crollano al primo impatto con la realtà aziendale. **C.I.P.O.** unisce il rigore delle buone norme ingegneristiche alla concretezza di chi conosce i problemi veri della produzione: consistenza contabile, transazioni multi-tabella, performance deterministiche, interoperabilità tra runtime storici e moderni, e software affidabile pensato per durare e sostenere progetti ambiziosi.
 
 ---
 
@@ -24,33 +24,46 @@ Troppo spesso gli assistenti generici propongono soluzioni accademiche, dogmi te
 
 C.I.P.O. non forza mai un pattern unico: analizza il contesto del progetto e adotta la strategia architetturale più efficiente.
 
-### 1. Sistemi Legacy & IPC a Basso Livello
+### 1. Sistemi ERP & Moduli Gestionali Complessi
+Nello sviluppo del core business gestionale (contabilità, ciclo attivo/passivo, commesse, produzione):
+- **Integrità transazionale rigorosa (ACID)**: transazioni atomiche esplicite (`using var transaction`) per modifiche documentali multi-tabella (testata-righe, castelletti IVA, movimenti contabili dare/avere). Rollback immediato su eccezione e divieto di stati parziali non coerenti.
+- **Precisione finanziaria senza compromessi**: divieto categorico di tipi floating-point (`double`/`float`) per importi e prezzi. Utilizzo esclusivo di `decimal` con politiche di arrotondamento esplicite a norma di legge (`MidpointRounding.AwayFromZero`) e `DateOnly` per azzerare discrepanze da fusi orari.
+- **Macchine a stati per il ciclo documentale**: validazione formale delle transizioni di stato nei documenti (*Bozza* -> *Confermato* -> *Fatturato* -> *Chiuso*) con precondizioni stringenti ed early return.
+- **Idempotenza delle elaborazioni**: processi di contabilizzazione e ricalcolo massivo progettati per essere rieseguibili senza generare duplicazioni.
+
+### 2. Tool Professionali, Launcher e Updater di Sistema
+Nello sviluppo di utility aziendali, strumenti di manutenzione e launcher applicativi:
+- **Gestione sicura dei processi attivi**: verifica preventiva dei processi in esecuzione prima di aggiornamenti binari (`Process.GetProcessesByName`), con attesa controllata per evitare blocchi da file in uso.
+- **Backup preventivo e fallback**: creazione automatica di copie di sicurezza prima di sovrascrivere eseguibili o configurazioni critiche, con ripristino immediato in caso di errore.
+- **Supporto per esecuzioni silenziose**: gestione di parametri CLI per esecuzioni non presidiate (`/silent`, `/noupdate`) e restituzione coerente dell'`ExitCode` per consentire l'orchestrazione da script batch esterni.
+
+### 3. Sistemi Legacy & IPC a Basso Livello
 Quando il progetto dialoga con runtime procedurali storici (COBOL, C nativo) o memoria condivisa (`MemoryMappedFile`, socket, pipe):
-- **Buffer a record fisso deterministici**: inizializzazione rigorosa a lunghezza fissa predefinita per evitare disallineamenti di offset binari in memoria.
-- **Emulazione del reset di stato**: implementazione di metodi imperativi di pulizia buffer prima di ogni ciclo per evitare contaminazioni tra chiamate consecutive.
+- **Buffer a record fisso deterministici**: inizializzazione rigorosa a lunghezza fissa con spazi (`new string(' ', N)`) per evitare disallineamenti di offset binari in memoria.
+- **Emulazione del reset di stato (`.Svuota()`)**: ripristino manuale dei buffer prima di ogni ciclo consecutivo per prevenire contaminazioni di memoria tra chiamate (emulazione `INITIALIZE`).
 - **Serializzazione binaria a byte**: lettura e scrittura esatta con codifiche host a byte (es. `Windows-1252`) senza l'overhead di parser generici (JSON/XML).
-- **Protocolli a codici di stato**: intercettazione delle eccezioni interne e traduzione in flag di stato standard per garantire compatibilità con i chiamanti storici.
+- **Protocolli a codici di stato**: traduzione automatica delle eccezioni .NET in flag di stato legacy (`Status = "Y"/"N"` e buffer di errore a lunghezza fissa).
 
-### 2. Terminali Industriali & Barcode
-Nello sviluppo di interfacce web (Blazor WebAssembly / PWA) destinate a palmari industriali e lettori laser di magazzino:
+### 4. Interfacce Web & Terminali Operativi con Barcode
+Nello sviluppo di interfacce web (Blazor WebAssembly / PWA) per postazioni operative e terminali con scanner:
 - **Gestione dell'input laser**: disabilitazione preventiva della tastiera virtuale a schermo (`inputmode="none"`) sui campi di lettura per non coprire l'interfaccia dell'operatore.
-- **Navigazione fluida su terminatore**: intercettazione immediata del carattere terminatore inviato dal lettore ottico (`Enter` o `Tab`) e spostamento deterministico del focus sul campo successivo via JS Interop.
-- **Flussi sequenziali guidati**: ID dei controlli numerati in sequenza ordinata per semplificare attraversamento e debug sul campo.
+- **Navigazione fluida su terminatore**: intercettazione immediata del carattere terminatore (`Enter` o `Tab`) e spostamento deterministico del focus sul campo successivo via JS Interop.
+- **Flussi sequenziali guidati**: ID dei controlli numerati in sequenza ordinata (`01-...`, `02-...`) per semplificare attraversamento e debug.
 
-### 3. Client Desktop Enterprise
-Nello sviluppo di shell desktop gestionali ad alta interattività:
+### 5. Client Desktop Enterprise (WinUI 3 / WinForms)
+Nello sviluppo di shell desktop gestionali ad alta densità di dati e interattività:
 - **Configurazioni e stato condiviso**: utilizzo di archivi centralizzati di sistema per condividere credenziali e percorsi tra processi eterogenei attivi sulla macchina.
-- **Code-behind pragmatico**: accesso diretto alla Visual Tree quando le visualizzazioni complesse (alberi gerarchici di centinaia di programmi, filtri in tempo reale) renderebbero il puro MVVM un'inutile indirezione.
+- **Code-behind pragmatico**: interazione diretta con la Visual Tree quando le visualizzazioni complesse (alberi gerarchici di centinaia di programmi, filtri in tempo reale) renderebbero il puro MVVM un'inutile indirezione.
 - **Wrapper ergonomici per la UI**: incapsulamento del boilerplate di dialogo e notifica in classi helper statiche e immediate.
 
-### 4. Processi Batch & Automazioni di Sistema
+### 6. Processi Batch & Automazioni di Sistema
 Nello sviluppo di strumenti CLI e orchestratori batch:
 - **Sincronizzazione esplicita verso il processo padre**: attesa deterministica delle API interne per restituire codici di uscita sincroni (`ExitCode`) conformi agli orchestratori di sistema.
-- **Gestione dei file segnalatori**: elaborazione sequenziale dei file di spool con eliminazione atomica a conferma del successo o tracciamento d'errore dedicato.
+- **Lock atomico e prevenzione collisioni**: scrittura su estensione temporanea (`.tmp`) con rinomina atomica finale (`.dat`) e lettura esclusiva controllata con retry pattern per evitare conflitti tra processi contemporanei.
 
-### 5. Backend Moderno & Cloud-Ready
-In assenza di vincoli legacy o hardware di magazzino, C.I.P.O. applica le moderne pratiche di ingegneria del software:
-- Tipi fortemente tipizzati nativi (`decimal`, `DateTime`, `DateOnly`, `int`, `bool`) e `string.Empty` (nessuno spazio fittizio fuori dall'interscambio legacy).
+### 7. Backend Moderno & Sicurezza
+In assenza di vincoli legacy o interfacce barcode, C.I.P.O. applica le moderne pratiche di ingegneria del software:
+- Tipi fortemente tipizzati nativi e `string.Empty` (nessuno spazio fittizio fuori dall'interscambio legacy).
 - Gestione automatica del ciclo di vita con `using var` e piena conformità al Garbage Collector.
 - Sintassi C# lineare, moderna ed espressiva (pattern matching, file-scoped namespaces, early return).
 
@@ -77,34 +90,40 @@ C.I.P.O. può essere utilizzato in 3 modalità operative complementari:
 
 ---
 
-## Installazione Rapida
+## Installazione e Gestione del Ciclo di Vita
 
 > **Prerequisiti**: È sufficiente disporre di **Google Antigravity** (o CLI `agy`) installato sul sistema e di una console PowerShell (Windows) o Bash (Linux/macOS).
 
-### Metodo 1: Comando Rapido One-Liner (Windows PowerShell)
-
-Apri una finestra PowerShell ed esegui questo singolo comando per installare C.I.P.O. globalmente sul tuo utente:
-
+### 1. Installazione Rapida (One-Liner PowerShell)
+Apri PowerShell ed esegui:
 ```powershell
 irm https://raw.githubusercontent.com/Ste-CipoDev/C.I.P.O./main/install.ps1 | iex
 ```
 
+### 2. Aggiornamento Rapido all'Ultima Versione
+Per sincronizzare le ultime modifiche rilasciate sul repository:
+```powershell
+irm https://raw.githubusercontent.com/Ste-CipoDev/C.I.P.O./main/update.ps1 | iex
+```
+
+### 3. Disinstallazione Completa
+Se desideri rimuovere pulitamente C.I.P.O. dal sistema:
+```powershell
+irm https://raw.githubusercontent.com/Ste-CipoDev/C.I.P.O./main/uninstall.ps1 | iex
+```
+
 ---
 
-### Metodo 2: Installazione Manuale da Repository Clonato
-
-Se preferisci scaricare o clonare manualmente il repository:
+### Procedura Manuale da Repository Clonato
 
 #### Su Windows (PowerShell):
 ```powershell
 $destSkills = "$env:USERPROFILE\.gemini\config\skills\cipo"
 $destPlugin = "$env:USERPROFILE\.gemini\config\plugins\cipo"
 
-# Crea le cartelle di destinazione
 New-Item -ItemType Directory -Force -Path $destSkills | Out-Null
 New-Item -ItemType Directory -Force -Path "$destPlugin\skills\cipo" | Out-Null
 
-# Copia le definizioni
 Copy-Item -Force ".\skills\cipo\SKILL.md" -Destination "$destSkills\SKILL.md"
 Copy-Item -Force ".\plugins\cipo\plugin.json" -Destination "$destPlugin\plugin.json"
 Copy-Item -Force ".\skills\cipo\SKILL.md" -Destination "$destPlugin\skills\cipo\SKILL.md"
@@ -133,7 +152,7 @@ Google Antigravity scansiona automaticamente la cartella `~/.gemini/config/skill
 
 ## Personalizzazione ed Estendibilità
 
-C.I.P.O. è progettato per essere facilmente esteso. Se la tua azienda o il tuo team utilizzano protocolli proprietari, librerie interne o convenzioni di formattazione specifiche, è sufficiente modificare il file locale:
+C.I.P.O. è progettato per essere facilmente esteso. Se la tua azienda o il tuo team utilizzano convenzioni specifiche, è sufficiente modificare il file locale:
 
 ```text
 ~/.gemini/config/skills/cipo/SKILL.md
