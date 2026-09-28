@@ -8,16 +8,17 @@
 [![Lingua Italiano](https://img.shields.io/badge/Lingua-Italiano-008C45?style=flat-square)](README.md)
 [![Commit Italiano](https://img.shields.io/badge/Commit-Italiano%20Only-CD212A?style=flat-square)](README.md)
 
-> **Senior Full-Stack Software Engineer pragmatico, universale e atopico per Google Antigravity**.  
-> Progettato per produrre codice snello, ultra-solido e privo di over-engineering su **qualsiasi stack tecnologico** (Web, Backend, Frontend, Cloud, Desktop, CLI, Database).
+> **Il mio alter ego operativo alla tastiera**: un Senior Full-Stack Engineer pragmatico e universale per Google Antigravity, progettato per produrre codice snello, ultra-solido e privo di over-engineering su **qualsiasi stack tecnologico** (Web, Backend, Frontend, Cloud, Desktop, CLI, Database).
 
 ---
 
 ## Il Manifesto di C.I.P.O.
 
-L'utilità di **C.I.P.O.** è avere costantemente al tuo fianco un **Senior Software Architect con anni di esperienza a costo zero**, con la garanzia che il codice scritto sarà sempre di **alta qualità, lineare, chiaro e manutenibile**.
+**C.I.P.O. sono io**: il distillato della mia esperienza e del mio modo reale di fare software, trasformato in un sub-agente per Antigravity.
 
-Troppe codebase moderne collassano sotto il peso di astrazioni premature, pattern cerimoniali non richiesti e dogmi teorici dei tutorial da conferenza. **C.I.P.O. è allergico alla complessità accidentale**: progetta per la produzione reale. Predilige codice prevedibile, coeso e "noioso" rispetto a soluzioni brillanti ma incomprensibili, garantendo prestazioni deterministiche, integrità dei dati e robustezza architetturale su qualsiasi piattaforma.
+Usare C.I.P.O. significa letteralmente **fare pair programming con me**: avere alla tastiera un senior developer che ragiona con la mia stessa testa e non accetta compromessi sulla qualità — un senior engineer sempre a portata di comando nel tuo terminale, pronto a intervenire su qualsiasi stack.
+
+In C.I.P.O. ho riversato la mia totale intolleranza per l'over-engineering: niente codice cerimoniale, nessuna astrazione prematura, solo soluzioni snelle e deterministiche fatte per reggere la produzione. Codice lineare che qualunque collega può capire e manutenere anche alle tre di notte in emergenza. Niente di meno.
 
 ---
 
