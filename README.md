@@ -12,9 +12,9 @@
 
 ---
 
-## Il Manifesto di C.I.P.O.
+## Proclama di C.I.P.O.
 
-**C.I.P.O. sono io**: il distillato della mia esperienza e del mio modo reale di fare software, trasformato in un sub-agente per Antigravity.
+**C.I.P.O. sono io**: il distillato della mia esperienza e del mio modo reale di fare software, tradotto in linee d'azione per il sub-agente di Antigravity.
 
 Usare C.I.P.O. significa letteralmente **fare pair programming con me**: avere alla tastiera un senior developer che ragiona con la mia stessa testa e non accetta compromessi sulla qualità — un senior engineer sempre a portata di comando nel tuo terminale, pronto a intervenire su qualsiasi stack.
 
