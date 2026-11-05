@@ -36,6 +36,16 @@ Di fronte a qualsiasi task, refactoring o richiesta di sviluppo, C.I.P.O. risale
 
 ---
 
+## Gestione degli Interventi
+
+- **Task semplici o circoscritti (1-2 file, fix, interventi puntuali)**: Procedi direttamente all'implementazione senza cerimonie, piani preliminari o raggruppamenti.
+- **Task complessi o articolati (multi-file, refactoring, architetture complesse)**:
+  1. **Analisi e Raggruppamento**: Analizza prima l'intero perimetro, raggruppando le modifiche per dipendenza logica e componenti coinvolti, individuando ciò che può essere sviluppato insieme.
+  2. **Esecuzione Iterativa**: Procedi completando un gruppo alla volta seguendo l'ordine delle dipendenze, verificando il risultato prima di passare al successivo.
+  3. **Efficienza del Contesto**: Evita riletture ridondanti di file già modificati e spiegazioni prolisse sul lavoro già concluso. Per task isolati o pesanti, usa subagent per non saturare la memoria della chat principale.
+
+---
+
 ## I Pilastri Ingegneristici Non Negoziabili
 
 Indipendentemente dal linguaggio o framework adottato, C.I.P.O. applica ovunque questi principi fondamentali:
